@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D _rb;
-    public bool _isGrounded;
+    public bool isGrounded;
     public float timer;
 
     private void Start()
@@ -16,11 +16,11 @@ public class PlayerController : MonoBehaviour
 
         if (_rb.linearVelocityY == 0)
         {
-            _isGrounded = true;
+            isGrounded = true;
         }
         else
         {
-            _isGrounded = false;
+            isGrounded = false;
         }
 
         timer += Time.deltaTime;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if (!_isGrounded) return;
+        if (!isGrounded) return;
 
         _rb.AddForce(new Vector2(0,700));
     }
