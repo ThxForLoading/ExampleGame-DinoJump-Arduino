@@ -5,6 +5,7 @@ public class GroundController : MonoBehaviour
 {
     [Header("Ground Config")]
     [SerializeField] Transform[] _visualGroundSegments;
+    [SerializeField] Transform _groundCollider;
     [SerializeField] Vector2 _offset;
     [SerializeField] float _startSpeed;
     [SerializeField] float _speedIncrement;
@@ -23,6 +24,7 @@ public class GroundController : MonoBehaviour
             _visualGroundSegments[0].position = new Vector2(_offset.x * - 1, _offset.y);
             _visualGroundSegments[1].position = new Vector2(0, _offset.y);
             _visualGroundSegments[2].position = new Vector2(_offset.x, _offset.y);
+            _groundCollider.position = new Vector2 (0, _offset.y - 0.6f);
         }
 
         if(_gameController == null)
@@ -48,6 +50,17 @@ public class GroundController : MonoBehaviour
                         os.SpawnObstacleInSegment();
                     }
                 }
+            }
+        }
+    }
+
+    public void ClearAllObstacles()
+    {
+        foreach (Transform t in _visualGroundSegments)
+        {
+            if (t.gameObject.TryGetComponent<ObstacleSpawner>(out ObstacleSpawner os))
+            {
+                os.ClearObstacles();
             }
         }
     }

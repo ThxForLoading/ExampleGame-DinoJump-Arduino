@@ -24,7 +24,7 @@ public class ObstacleSpawner : MonoBehaviour
         {
             foreach (Transform child in t)
             {
-                Destroy(child);
+                Destroy(child.gameObject);
             }
         }
     }
