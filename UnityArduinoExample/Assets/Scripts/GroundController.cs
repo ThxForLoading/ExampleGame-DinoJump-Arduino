@@ -44,6 +44,7 @@ public class GroundController : MonoBehaviour
                     t.position += new Vector3(_offset.x * _visualGroundSegments.Length, 0, 0);
                     if(t.gameObject.TryGetComponent<ObstacleSpawner>(out ObstacleSpawner os))
                     {
+                        os.ClearObstacles();
                         os.SpawnObstacleInSegment();
                     }
                 }

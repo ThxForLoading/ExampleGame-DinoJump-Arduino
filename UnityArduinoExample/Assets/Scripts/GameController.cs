@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
 
     public static GameController instance;
 
+    private ArduinoComms _arduinoController;
+
     private void Awake()
     {
         if (instance == null)
@@ -22,11 +24,25 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        _arduinoController = ArduinoComms.instance;
+    }
+
     private void Update()
     {
-        if(currentState == GameState.Running) gameTimer = gameTimer + Time.deltaTime;
+        if (currentState == GameState.Running)
+        {
+            _arduinoController.playerAlive = true;
+            gameTimer = gameTimer + Time.deltaTime;
+        }
+        else
+        {
+            _arduinoController.playerAlive = false;
+        }
 
-        if((currentState == GameState.Starting || currentState == GameState.GameOver) && gameTimer != 0) gameTimer = 0; 
+        if ((currentState == GameState.Starting || currentState == GameState.GameOver) && gameTimer != 0) gameTimer = 0;
+
     }
 
 }

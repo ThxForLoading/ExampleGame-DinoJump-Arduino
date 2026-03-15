@@ -17,4 +17,15 @@ public class ObstacleSpawner : MonoBehaviour
 
         Instantiate(_obstaclesToSpawn[obs], _spawnPoints[spawn]);
     }
+
+    public void ClearObstacles()
+    {
+        foreach  (Transform t in _spawnPoints)
+        {
+            foreach (Transform child in t)
+            {
+                Destroy(child);
+            }
+        }
+    }
 }
